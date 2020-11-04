@@ -1,2 +1,2 @@
 # Kotlin-Extentions
-Simple kotlin extentions i find to be somehow usefull.
+Kotlin extentions for Basic Types like Double or Int, Strings, or Anything.
