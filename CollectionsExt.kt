@@ -21,7 +21,7 @@ inline fun <T, K> Iterable<T>.distinctAndFilter(distinctBy: (T) -> K, filterBy: 
 * Uses sumWith from DoubleExt to avoid algebraic errors
 * @see DoubleExt
 */
-inline fun <T> Iterable<T>.sumByDoubleCool(selector: (T) -> Double): Double {
+inline fun <T> Iterable<T>.sumByDoubleSafe(selector: (T) -> Double): Double {
     var sum: Double = 0.0
     for (element in this) {
         sum = sum.sumWith(selector(element))
