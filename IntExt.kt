@@ -1,3 +1,1 @@
-fun Int?.orZero(): Int {
-    return this ?: 0
-}
+fun Int?.orZero() = this ?: 0

@@ -3,25 +3,19 @@ fun String.orIfEmpty(input: () -> String): String {
     else this
 }
 
-fun String?.toDoubleOrZero(): Double {
-    return this?.toDoubleOrNull() ?: 0.0
-}
+fun String?.toDoubleOrZero() = this?.toDoubleOrNull() ?: 0.0
 
 fun String?.toDoubleOrDefault(defaultValue: Double): Double {
-    return this?.toDoubleOrNull() ?: defaultValue
+    return
 }
 
-fun String?.toIntOrZero(): Int {
-    return this?.toIntOrNull() ?: 0
-}
+fun String?.toIntOrZero() = this?.toIntOrNull() ?: 0
 
 fun String?.toIntOrDefault(defaultValue: Int): Int {
     return this?.toIntOrNull() ?: defaultValue
 }
 
-fun String?.toLongOrZero(): Long {
-    return this?.toLongOrNull() ?: 0L
-}
+fun String?.toLongOrZero() = this?.toLongOrNull() ?: 0L
 
 fun String?.toLongOrDefault(defaultValue: Long): Long {
     return this?.toLongOrNull() ?: defaultValue

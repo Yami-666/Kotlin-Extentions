@@ -9,10 +9,10 @@ inline fun <reified T> T?.orIfNull(input: () -> T): T {
 * get Enum from String
 * */
 inline fun <reified T : Enum<*>> enumValueOrNull(name: String): T? =
-T::class.java.enumConstants.firstOrNull { it.name == name }
+    T::class.java.enumConstants.firstOrNull { it.name == name }
 
 inline fun <reified T : Enum<*>> enumValueOrDefault(name: String, default: T): T =
-T::class.java.enumConstants.firstOrNull { it.name == name } ?: default
+    T::class.java.enumConstants.firstOrNull { it.name == name } ?: default
 
 /**
 * try default fun realisation
@@ -35,13 +35,9 @@ fun <T : Any> tryOrNull(tryFunc: () -> T): T? {
     }
 }
 
-fun tryOrEmpty(tryFunc: () -> String): String {
-  return tryOrDefault({ tryFunc() }, "")
-}
+fun tryOrEmpty(tryFunc: () -> String) = tryOrDefault({ tryFunc() }, "")
 
-fun tryOrNow(tryFunc: () -> Date): Date {
-  return tryOrDefault({ tryFunc() }, Date())
-}
+fun tryOrNow(tryFunc: () -> Date) = tryOrDefault({ tryFunc() }, Date())
 
 /**
 * unsafe lazy delegate realisation
