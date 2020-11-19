@@ -21,7 +21,7 @@ fun <T : Any> tryOrDefault(tryFunc: () -> T, defaultIfCatches: T): T {
   return try {
     tryFunc()
     } catch (e: Exception) {
-      Logg.e { "tryOrDefault exception: ${e.message}" }
+      //pls add logging here, for example in android: Log.e ("tag", "tryOrDefault exception: ${e.message}", e)
       defaultIfCatches
     }
 }
@@ -30,7 +30,7 @@ fun <T : Any> tryOrNull(tryFunc: () -> T): T? {
     return try {
         tryFunc()
     } catch (e: Exception) {
-        Logg.e { "tryOrNull exception: ${e.message}" }
+        //pls add logging here, for example in android: Log.e ("tag", "tryOrNull exception: ${e.message}", e)
         null
     }
 }
