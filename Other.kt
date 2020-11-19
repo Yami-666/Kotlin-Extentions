@@ -26,6 +26,15 @@ fun <T : Any> tryOrDefault(tryFunc: () -> T, defaultIfCatches: T): T {
     }
 }
 
+fun <T : Any> tryOrNull(tryFunc: () -> T): T? {
+    return try {
+        tryFunc()
+    } catch (e: Exception) {
+        Logg.e { "tryOrNull exception: ${e.message}" }
+        null
+    }
+}
+
 fun tryOrEmpty(tryFunc: () -> String): String {
   return tryOrDefault({ tryFunc() }, "")
 }
