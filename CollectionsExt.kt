@@ -28,3 +28,14 @@ inline fun <T> Iterable<T>.sumByDoubleSafe(selector: (T) -> Double): Double {
     }
     return sum
 }
+
+fun <K, V> Iterable<Pair<K, V>>.toMutableMap(): MutableMap<K, V> {
+    if (this is Collection) {
+        return when (size) {
+            0 -> mutableMapOf()
+            1 -> mutableMapOf(if (this is List) this[0] else iterator().next())
+            else -> toMap(LinkedHashMap<K, V>(size))
+        }
+    }
+    return toMap(LinkedHashMap())
+}
