@@ -1,11 +1,17 @@
 fun <T> List<T>?.orEmptyMutable(): MutableList<T> = this?.toMutableList() ?: mutableListOf()
 
+fun <T> List<T>.indexOfOrNull(element: T) = this.indexOf(element).takeIf { it != -1 }
+
 fun <T> Set<T>?.orEmptyMutable(): MutableSet<T> = this?.toMutableSet() ?: mutableSetOf()
 
 fun <T> MutableCollection<T>.addIf(predicate: Boolean, whatToAdd: () -> T) {
     if (predicate) this.add(whatToAdd())
 }
 
+/**
+* Distincts and filter Iterable in one cycle. Faster that using
+* list.distinctBy {  }.filter {  }
+*/
 inline fun <T, K> Iterable<T>.distinctAndFilter(distinctBy: (T) -> K, filterBy: (T) -> Boolean): List<T> {
     val set = HashSet<K>()
     val list = ArrayList<T>()
