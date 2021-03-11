@@ -45,3 +45,26 @@ fun tryOrNow(tryFunc: () -> Date) = tryOrDefault({ tryFunc() }, Date())
 inline fun <reified T, reified R> R.unsafeLazy(noinline init: () -> T): Lazy<T> {
   return lazy(LazyThreadSafetyMode.NONE, init)
 }
+
+fun <T, V> T?.orLet(variable: V?, letBlock: (V) -> T) = this ?: variable?.let(letBlock::invoke)
+
+/**
+* Shorter version of coroutine context swtiching to Default dispatcher
+*/
+suspend fun <T> doOnDefault(doFun: () -> T) = withContext(Dispatchers.Default) {
+    doFun()
+}
+
+/**
+* Shorter version of coroutine context swtiching to Main dispatcher
+*/
+suspend fun <T> doOnMain(doFun: () -> T) = withContext(Dispatchers.Main) {
+    doFun()
+}
+
+/**
+* Shorter version of coroutine context swtiching to IO dispatcher
+*/
+suspend fun <T> doOnIO(doFun: () -> T) = withContext(Dispatchers.IO) {
+    doFun()
+}

@@ -44,6 +44,7 @@ fun Double.divWith(other: Double, numberOfZeroes: Int = 3): Double? {
         val pow = ((this).toBigDecimal() / (other).toBigDecimal()).toDouble()
         pow.roundTo(numberOfZeroes)
     } else {
+      //pls add logging here
         null
     }
 }

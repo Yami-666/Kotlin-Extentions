@@ -22,3 +22,5 @@ fun String?.toLongOrDefault(defaultValue: Long): Long {
 }
 
 fun String.trimZeros() = this.trimStart('0')
+
+fun String?.orZero() = this ?: "0"

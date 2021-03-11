@@ -1,8 +1,23 @@
 fun <T> List<T>?.orEmptyMutable(): MutableList<T> = this?.toMutableList() ?: mutableListOf()
 
-fun <T> List<T>.indexOfOrNull(element: T) = this.indexOf(element).takeIf { it != -1 }
-
 fun <T> Set<T>?.orEmptyMutable(): MutableSet<T> = this?.toMutableSet() ?: mutableSetOf()
+
+fun <T, K> Map<T, K>?.orEmptyMutable(): MutableMap<T, K> = this?.toMutableMap() ?: mutableMapOf()
+
+fun <T, K> List<Pair<T, K>>?.orEmptyMutableMap(): MutableMap<T, K> = this?.toMutableMap() ?: mutableMapOf()
+
+fun <K, V> Iterable<Pair<K, V>>.toMutableMap(): MutableMap<K, V> {
+    if (this is Collection) {
+        return when (size) {
+            0 -> mutableMapOf()
+            1 -> mutableMapOf(if (this is List) this[0] else iterator().next())
+            else -> toMap(LinkedHashMap<K, V>(size))
+        }
+    }
+    return toMap(LinkedHashMap())
+}
+
+fun <T> List<T>.indexOfOrNull(element: T) = this.indexOf(element).takeIf { it != -1 }
 
 fun <T> MutableCollection<T>.addIf(predicate: Boolean, whatToAdd: () -> T) {
     if (predicate) this.add(whatToAdd())
@@ -35,13 +50,17 @@ inline fun <T> Iterable<T>.sumByDoubleSafe(selector: (T) -> Double): Double {
     return sum
 }
 
-fun <K, V> Iterable<Pair<K, V>>.toMutableMap(): MutableMap<K, V> {
-    if (this is Collection) {
-        return when (size) {
-            0 -> mutableMapOf()
-            1 -> mutableMapOf(if (this is List) this[0] else iterator().next())
-            else -> toMap(LinkedHashMap<K, V>(size))
-        }
-    }
-    return toMap(LinkedHashMap())
+
+inline fun <reified T> Collection<T>.firstOrElse(elseFun: () -> T): T {
+    return this.firstOrNull().orIfNull(elseFun)
 }
+
+fun <T> List<T>.sizeInDouble(): Double {
+    return this.size.toDouble()
+}
+
+fun <T> List<T>.sizeInString(): String {
+    return this.size.toString()
+}
+
+fun String.takeIfNotEmpty() = this.takeIf { it.isNotEmpty() }
