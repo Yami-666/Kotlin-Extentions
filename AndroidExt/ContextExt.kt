@@ -1,21 +1,3 @@
-package com.lenta.shared.utilities.extentions
-
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import android.net.wifi.WifiManager
-import android.os.Build
-import android.provider.Settings
-import android.text.format.Formatter
-import android.util.TypedValue
-import com.lenta.shared.utilities.Logg
-import com.lenta.shared.utilities.runIfDebug
-import kotlin.system.exitProcess
-
-
 fun Context.getDeviceIp(): String {
     val wm = this.getSystemService(Context.WIFI_SERVICE) as WifiManager
     @Suppress("DEPRECATION")
@@ -26,9 +8,6 @@ fun Context.getDeviceIp(): String {
 @SuppressLint("HardwareIds")
 fun Context.getDeviceId(): String {
     var deviceId = Settings.Secure.getString(this.contentResolver, "android_id")
-    runIfDebug {
-        deviceId = "android_debug_device_$deviceId"
-    }
     return deviceId
 }
 
