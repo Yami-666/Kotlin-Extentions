@@ -24,3 +24,9 @@ fun String?.toLongOrDefault(defaultValue: Long): Long {
 fun String.trimZeros() = this.trimStart('0')
 
 fun String?.orZero() = this ?: "0"
+
+fun String.takeIfNotEmpty() = this.takeIf { it.isNotEmpty() }
+
+fun String.takeIfEmpty() = this.takeIf { it.isEmpty() }
+
+fun String?.isWhiteSpace() = this?.all { it == ' ' } == true

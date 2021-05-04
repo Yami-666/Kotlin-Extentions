@@ -62,5 +62,3 @@ fun <T> List<T>.sizeInDouble(): Double {
 fun <T> List<T>.sizeInString(): String {
     return this.size.toString()
 }
-
-fun String.takeIfNotEmpty() = this.takeIf { it.isNotEmpty() }

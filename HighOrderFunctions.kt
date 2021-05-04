@@ -22,11 +22,12 @@ suspend fun <T> doOnIO(doFun: () -> T) = withContext(Dispatchers.IO) {
 /**
 * try default fun realisation
 */
-fun <T : Any> tryOrDefault(tryFunc: () -> T, defaultIfCatches: T): T {
+fun <T : Any> tryOrDefault(defaultIfCatches: T, tryFunc: () -> T): T {
   return try {
     tryFunc()
     } catch (e: Exception) {
-      //pls add logging here, for example in android: Log.e ("tag", "tryOrDefault exception: ${e.message}", e)
+      //pls add logging here,
+      //for example in android: Log.e ("tag", "tryOrDefault exception: ${e.message}", e)
       defaultIfCatches
     }
 }
@@ -35,11 +36,12 @@ fun <T : Any> tryOrNull(tryFunc: () -> T): T? {
     return try {
         tryFunc()
     } catch (e: Exception) {
-        //pls add logging here, for example in android: Log.e ("tag", "tryOrNull exception: ${e.message}", e)
+        //pls add logging here,
+        //for example in android: Log.e ("tag", "tryOrNull exception: ${e.message}", e)
         null
     }
 }
 
-fun tryOrEmpty(tryFunc: () -> String) = tryOrDefault({ tryFunc() }, "")
+fun tryOrEmpty(tryFunc: () -> String) = tryOrDefault("") { tryFunc() }
 
-fun tryOrNow(tryFunc: () -> Date) = tryOrDefault({ tryFunc() }, Date())
+fun tryOrNow(tryFunc: () -> Date) = tryOrDefault(Date()) { tryFunc() }
