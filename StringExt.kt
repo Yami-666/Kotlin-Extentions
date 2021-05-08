@@ -6,7 +6,7 @@ fun String.orIfEmpty(input: () -> String): String {
 fun String?.toDoubleOrZero() = this?.toDoubleOrNull() ?: 0.0
 
 fun String?.toDoubleOrDefault(defaultValue: Double): Double {
-    return
+    return this?.toDoubleOrNull() ?: defaultValue
 }
 
 fun String?.toIntOrZero() = this?.toIntOrNull() ?: 0
